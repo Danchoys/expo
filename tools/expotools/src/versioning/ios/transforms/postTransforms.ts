@@ -38,6 +38,10 @@ export function postTransforms(versionName: string): TransformPipeline {
         with: 'FBReactNativeSpec',
       },
       {
+        replace: new RegExp('([^\\w\\.])(Native\\w+Spec)([^\\w\\.])', 'g'),
+        with: `$1${versionName}$2$3`,
+      },
+      {
         paths: 'RCTInspectorPackagerConnection.m',
         replace: /\b(RECONNECT_DELAY_MS)\b/g,
         with: `${versionName}$1`,
